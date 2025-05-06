@@ -1,0 +1,13 @@
+CREATE TABLE items (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE votes (
+    id SERIAL PRIMARY KEY,
+    item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
+    vote_type VARCHAR(10) CHECK (vote_type IN ('like', 'dislike')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+); 
